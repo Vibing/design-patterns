@@ -12,7 +12,7 @@
 
 在生活中，红绿灯就是状态模式的体现，灯颜色的变化会触发汽车或行人的行为
 先定义 State 类，它用于红绿灯颜色变化和相应的逻辑处理：
-```js
+```javascript
 class State {
   constructor(color){
     this.color = color;
@@ -33,24 +33,34 @@ class State {
 再看看 Context 类，它抽象出来 用于获取和设置当前 state
 ```javascript
 class Context {
-  constructor(){
+  constructor() {
     this.state = null;
   }
-  
-  getState(){
-    return this.state;
+
+  getState() {
+    return this.state
   }
 
-  setState(state){
+  setState(state) {
     this.state = state;
   }
 }
 ```
-：
+
+将状态抽离出来保存在 Context 中，具体的状态逻辑在 State 中，来看看调用：
 ```javascript
-class State {
-  constructor(){
-    this.state = null;
-  }
-}
+// use
+const context = new Context();
+
+// 红灯
+const redLight = new State('红灯')
+redLight.handle(context) // 跳到红灯了
+
+// 绿灯
+const redLight = new State('绿灯')
+redLight.handle(context) // 跳到绿灯了
+
+// 黄灯
+const redLight = new State('黄灯')
+redLight.handle(context) // 跳到黄灯了
 ```
